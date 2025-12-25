@@ -105,4 +105,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // Append the button to the Data tab
     const dataTab = document.getElementById("data");
     dataTab.appendChild(updateButton);
+
+    // Function to download the canvas as an image
+    function downloadCanvasAsImage(canvasId, filename) {
+        const canvas = document.getElementById(canvasId);
+
+        // Convert the canvas to a data URL
+        const imageData = canvas.toDataURL("image/png");
+
+        // Create a temporary link element
+        const downloadLink = document.createElement("a");
+        downloadLink.href = imageData;
+        downloadLink.download = filename;
+
+        // Trigger the download
+        downloadLink.click();
+    }
+
+    // Add a "Download Chart" button to the Chart tab
+    const downloadButton = document.createElement("button");
+    downloadButton.textContent = "Download Chart";
+    downloadButton.className = "btn btn-primary mt-3";
+    downloadButton.addEventListener("click", () => {
+        downloadCanvasAsImage("barChart", "chart.png");
+    });
+
+    // Append the button to the Chart tab
+    const chartTab = document.getElementById("chart");
+    chartTab.appendChild(downloadButton);
 });
